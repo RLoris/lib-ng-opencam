@@ -9,6 +9,7 @@ You can integrate opencam in your project using `npm i ng-opencam --save`. For m
 
 # Demo OpenCam
 
+![Demo setup](./assets/demo.png)
 Clone this repo and run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files. You can then test the opencam library demo.
 
 # License
