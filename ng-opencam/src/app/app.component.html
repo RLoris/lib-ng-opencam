@@ -1,0 +1,78 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+  <p>This project was made with &hearts; by RLoris</p>
+  <p>Use it, Share it, Improve it</p>
+</div>
+<div>
+  <label>Camera: </label>
+  <select [(ngModel)]="this.videoSource">
+    <option *ngFor="let source of this.videoSources" >Camera {{source.label}}</option>
+  </select>
+  <br>
+  <label>Microphone: </label>
+  <select [(ngModel)]="this.audioSource">
+    <option></option>
+    <option *ngFor="let source of this.audioSources" >Microphone {{source.label}}</option>
+  </select>
+  <br>
+  <label>Height: </label>
+  <input [(ngModel)]="this.height" type='text'>
+  <br>
+  <label>Width: </label>
+  <input [(ngModel)]="this.width" type='text'>
+  <br>
+  <label>Capture Mode: </label>
+  <button (click)='switchMode()'>{{this.captureType}} Mode</button>
+  <br>
+  <label>Countdown: </label>
+  <input [(ngModel)]="this.countDown" type='number'>
+  <br>
+  <label>Stream Mode: </label>
+  <select [(ngModel)]="this.streamState">
+    <option *ngFor="let state of streamStates" >{{state}}</option>
+  </select>
+  <br>
+  <label>Constraints: </label>
+  <select [(ngModel)]="this.mediaConstraint">
+    <option *ngFor="let c of this.mediaConstraints" >{{c}}</option>
+  </select>
+  <br>
+  <label>Filter: </label>
+  <select [(ngModel)]="this.filter">
+    <option *ngFor="let f of this.filters" >{{f}}</option>
+  </select>
+  <br>
+  <label>Framerate: </label>
+  <select [(ngModel)]="this.framerate">
+    <option *ngFor="let f of this.framerates" >{{f}}</option>
+  </select>
+  <br>
+  <button style="display: block; width: 100%" (click)='capture()' [style.background-color]='getBgColor()'>Capture</button>
+  <br>
+</div>
+<ng-opencam
+    [capture]='this.capture$'
+    [height]='this.height'
+    [width]='this.width'
+    [captureType]='this.captureType'
+    [streamState]='this.streamState'
+    [mediaConstraints]='this.mediaConstraint'
+    [videoSource]='this.videoSource'
+    [audioSource]='this.audioSource'
+    [filters]='this.filter'
+    [framerate]='this.framerate'
+    (videoSourceEvent)='this.getVideoSources($event)'
+    (audioSourceEvent)='this.getAudioSources($event)'
+    (captureEvent)='this.getCapture($event)'
+    (errorEvent)='this.getErrors($event)'>
+</ng-opencam>
+
+<h1>Captures</h1>
+<hr>
+<h2>Images ({{images.length}})</h2>
+<img *ngFor="let img of images" [src]='img'>
+<h2>Videos ({{videos.length}})</h2>
+<video controls autoplay *ngFor="let vid of videos" [src]='vid'></video>
