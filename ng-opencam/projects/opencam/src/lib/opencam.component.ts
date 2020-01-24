@@ -103,7 +103,7 @@ export class OpencamComponent implements OnInit, OnDestroy {
   set streamState(v: EStreamState) {
     if (v) {
       this._streamState = v;
-      if (this.stream) {
+      if (this.stream !== undefined && this.stream !== null) {
         if (v === EStreamState.PLAY) {
           this.video.play();
           if (this.recorder) {
@@ -173,7 +173,7 @@ export class OpencamComponent implements OnInit, OnDestroy {
   private _filters: string;
 
   video = document.createElement('video');
-  @ViewChild('opencam')
+  @ViewChild('opencam', {static: true})
   canvas;
   ctx: CanvasRenderingContext2D;
 
@@ -219,7 +219,7 @@ export class OpencamComponent implements OnInit, OnDestroy {
   scanCaptureDevices() {
     navigator.mediaDevices
       .enumerateDevices()
-      .then((d: MediaDeviceInfo[]) => { this.handleCaptureDevices(d); this.initStream(); })
+      .then((d: MediaDeviceInfo[]) => { this.handleCaptureDevices(d); /*this.initStream();*/ })
       .catch((e) => this.errorHandler(e));
   }
 
@@ -243,19 +243,23 @@ export class OpencamComponent implements OnInit, OnDestroy {
         // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < devicesInfos.length; i++) {
             if (devicesInfos[i].kind === 'videoinput') {
-              devicesFound++;
-              this.videoSources.push({
-                id: devicesInfos[i].deviceId,
-                label: devicesInfos[i].label,
-                kind: devicesInfos[i].kind,
-              });
+              if(devicesInfos[i].deviceId !== undefined) {
+                devicesFound++;
+                this.videoSources.push({
+                  id: devicesInfos[i].deviceId,
+                  label: devicesInfos[i].label,
+                  kind: devicesInfos[i].kind,
+                });
+              }
             }
             if (devicesInfos[i].kind === 'audioinput') {
-              this.audioSources.push({
-                id: devicesInfos[i].deviceId,
-                label: devicesInfos[i].label,
-                kind: devicesInfos[i].kind,
-              });
+              if(devicesInfos[i].deviceId !== undefined) {
+                this.audioSources.push({
+                  id: devicesInfos[i].deviceId,
+                  label: devicesInfos[i].label,
+                  kind: devicesInfos[i].kind,
+                });
+              }
             }
       }
       if (devicesFound === 0) {
@@ -300,7 +304,9 @@ export class OpencamComponent implements OnInit, OnDestroy {
             this.video.srcObject = this.stream;
             this.video.muted = true;
             this.video.controls = false;
-            this.video.play();
+            if(this._streamState === EStreamState.PLAY) {
+              this.video.play();
+            }
         }).catch( (error) => {
           this.errorHandler(error);
         });
@@ -368,7 +374,7 @@ export class OpencamComponent implements OnInit, OnDestroy {
       const canvas = document.createElement('canvas');
       canvas.width = this.video.videoWidth;
       canvas.height = this.video.videoHeight;
-      canvas.getContext('2d').drawImage(this.video, 0, 0);
+      canvas.getContext('2d').drawImage(this.canvas.nativeElement, 0, 0);
       const data = canvas.toDataURL();
       return data;
     }

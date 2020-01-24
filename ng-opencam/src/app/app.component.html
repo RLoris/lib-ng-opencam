@@ -5,10 +5,12 @@
   </h1>
   <p>This project was made with &hearts; by RLoris</p>
   <p>Use it, Share it, Improve it</p>
+  <h3>To initiate the stream, select a video input below (since last browser version, stream must be initiated by user)</h3>
 </div>
 <div>
   <label>Camera: </label>
   <select [(ngModel)]="this.videoSource">
+    <option></option>
     <option *ngFor="let source of this.videoSources" >Camera {{source.label}}</option>
   </select>
   <br>
