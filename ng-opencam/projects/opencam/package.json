@@ -6,7 +6,7 @@
   "keywords": ["webcam", "camera", "picture", "video", "component", "opencam", "filters", "angular", "canvas", "recording", "webm", "audio"],
   "displayName": "Angular OpenCam Library",
   "repository": {"type": "github", "url": "https://github.com/RLoris/lib-ng-opencam"},
-  "version": "0.0.4",
+  "version": "0.0.5",
   "peerDependencies": {
     "@angular/common": "^7.2.0",
     "@angular/core": "^7.2.0"

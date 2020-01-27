@@ -4,7 +4,7 @@ Opencam is an Angular library component developped to manipulate camera and perf
 
 # Demo
 
-Clone this [repo](https://github.com/RLoris/lib-ng-opencam) and run `ng serve` for a full demo of opencam.
+Try it out here: [DEMO](https://rloris.github.io/lib-ng-opencam/) or clone this [repo](https://github.com/RLoris/lib-ng-opencam) and run `ng serve` for a full demo of opencam.
 
 # Features
 
