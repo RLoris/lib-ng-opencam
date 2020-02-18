@@ -30,8 +30,8 @@ export class OpencamComponent implements OnInit, OnDestroy {
   @Input()
   set videoSource(v: ISourceDevice) {
     if (this.isScanCompleted) {
-      if (v) {
-        this._videoSource = v;
+      this._videoSource = this.videoSources.find(d => d.id == v.id);
+      if (this._videoSource) {
         this.stopStream();
         this.initStream();
       }
@@ -42,9 +42,11 @@ export class OpencamComponent implements OnInit, OnDestroy {
   @Input()
   set audioSource(v: ISourceDevice) {
     if (this.isScanCompleted) {
-      this._audioSource = v;
-      this.stopStream();
-      this.initStream();
+      this._audioSource = this.audioSources.find(d => d.id == v.id);
+      if(this._audioSource)  {
+        this.stopStream();
+        this.initStream();
+      }
     }
   }
   // tslint:disable-next-line:variable-name
@@ -292,6 +294,8 @@ export class OpencamComponent implements OnInit, OnDestroy {
       }
 
       this.constraints.video.deviceId = { exact: this.currentVideoSource.id };
+
+      console.log(this.constraints, this.videoSources);
 
       navigator.mediaDevices.getUserMedia(this.constraints)
       .then( (stream) => {

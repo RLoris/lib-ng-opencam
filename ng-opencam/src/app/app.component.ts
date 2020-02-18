@@ -139,5 +139,12 @@ export class AppComponent implements OnInit {
     }
   }
 
+  selectVideoSource(id) {
+    this.videoSource = this.videoSources.find(d => d.id === id);
+  }
+
+  selectAudioSource(id) {
+    this.audioSource = this.audioSources.find(d => d.id === id);
+  }
 
 }

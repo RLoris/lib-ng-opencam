@@ -42,8 +42,8 @@ Try it out here: [DEMO](https://rloris.github.io/lib-ng-opencam/) or clone this 
 | [width] | string | width size of the capture container, if null given capture container is not displayed |
 | [captureType] | enum(ECaptureType) | switch between various capture mode (video, picture) |
 | [streamState] | enum(EStreamState) | switch between various stream states (play, pause, stop)| [mediaConstraints] | enum(EMediaConstraints) | switch between various media constraints (hd, vga, fhd, default) | 
-[videoSource] | interface(ISourceDevice) | Specify the video source for the capture |
-[audioSource] | interface(ISourceDevice) | Specify the audio source for the capture |
+[videoSource] | ISourceDevice | Specify the video source for the capture |
+[audioSource] | ISourceDevice | Specify the audio source for the capture |
 [filters] | string | Apply css filters on the capture |
 [framerate] | number | Specify the framerate of the recording & canvas rendering |
 

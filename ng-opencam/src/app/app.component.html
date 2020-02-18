@@ -9,15 +9,15 @@
 </div>
 <div>
   <label>Camera: </label>
-  <select [(ngModel)]="this.videoSource">
+  <select (change)='selectVideoSource($event.target.value)'>
     <option></option>
-    <option *ngFor="let source of this.videoSources" >Camera {{source.label}}</option>
+    <option *ngFor="let source of this.videoSources" [value]='source.id'>Camera {{source.label}}</option>
   </select>
   <br>
   <label>Microphone: </label>
-  <select [(ngModel)]="this.audioSource">
+  <select (change)='selectAudioSource($event.target.value)'>
     <option></option>
-    <option *ngFor="let source of this.audioSources" >Microphone {{source.label}}</option>
+    <option *ngFor="let source of this.audioSources" [value]='source.id'>Microphone {{source.label}}</option>
   </select>
   <br>
   <label>Height: </label>
