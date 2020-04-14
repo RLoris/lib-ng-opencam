@@ -16,6 +16,17 @@ Try it out here: [DEMO](https://rloris.github.io/lib-ng-opencam/) or clone this 
 
 # How to use
 
+  First install the package with the command `npm i ng-opencam`
+
+  Then, in your module.ts, import the library module
+
+```
+import { OpencamModule } from 'ng-opencam';
+```
+
+  And add it to your imports modules.
+  You can now use `<ng-opencam></ng-opencam>` it in any component.html
+
 ```
 <ng-opencam
     [capture]='this.capture$'
@@ -34,6 +45,9 @@ Try it out here: [DEMO](https://rloris.github.io/lib-ng-opencam/) or clone this 
     (errorEvent)='this.getErrors($event)'>
 </ng-opencam>
 ```
+
+Check out the repo for a full demo code [here](https://github.com/RLoris/lib-ng-opencam)
+
 ## Inputs
 | Property | Type | Note |
 | -------- | ---- | ---- |
@@ -42,9 +56,9 @@ Try it out here: [DEMO](https://rloris.github.io/lib-ng-opencam/) or clone this 
 | [width] | string | width size of the capture container, if null given capture container is not displayed |
 | [captureType] | enum(ECaptureType) | switch between various capture mode (video, picture) |
 | [streamState] | enum(EStreamState) | switch between various stream states (play, pause, stop)| [mediaConstraints] | enum(EMediaConstraints) | switch between various media constraints (hd, vga, fhd, default) | 
-[videoSource] | ISourceDevice | Specify the video source for the capture |
-[audioSource] | ISourceDevice | Specify the audio source for the capture |
-[filters] | string | Apply css filters on the capture |
+[videoSource] | ISourceDevice | Specify the video source for the capture, sources are emitted by (videoSourceEvent) select the one you want to use |
+[audioSource] | ISourceDevice | Specify the audio source for the capture, sources are emitted by (audioSourceEvent) select the one you want to use |
+[filters] | string | Apply css filters on the feed and capture |
 [framerate] | number | Specify the framerate of the recording & canvas rendering |
 
 ## Outputs
@@ -58,6 +72,7 @@ Try it out here: [DEMO](https://rloris.github.io/lib-ng-opencam/) or clone this 
 # To-do
 
 - Improve filter system (add models to manipulate filters instead of css string)
+- Move media camera manipulation in a service
 
 # NPM
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SecurityContext } from '@angular/core';
 import { Subject } from 'rxjs';
 import { ECaptureType, EStreamState, EMediaConstraints, ISourceDevice } from 'projects/opencam/src/public-api';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
@@ -111,9 +111,9 @@ export class AppComponent implements OnInit {
   getCapture(capture) {
     this.isCapturing = false;
     if (this.captureType === ECaptureType.PICTURE) {
-      this.images.push(this.domSanitizer.bypassSecurityTrustResourceUrl(capture));
+      this.images.push(this.domSanitizer.sanitize(SecurityContext.URL,capture));
     } else {
-      this.videos.push(this.domSanitizer.bypassSecurityTrustResourceUrl(capture));
+      this.videos.push(this.domSanitizer.sanitize(SecurityContext.URL, capture));
     }
   }
 
