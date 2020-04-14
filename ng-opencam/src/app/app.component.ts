@@ -113,7 +113,7 @@ export class AppComponent implements OnInit {
     if (this.captureType === ECaptureType.PICTURE) {
       this.images.push(this.domSanitizer.sanitize(SecurityContext.URL,capture));
     } else {
-      this.videos.push(this.domSanitizer.sanitize(SecurityContext.URL, capture));
+      this.videos.push(this.domSanitizer.bypassSecurityTrustUrl(capture));
     }
   }
 
